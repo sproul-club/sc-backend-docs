@@ -2,11 +2,11 @@
 
 <!-- MarkdownTOC autolink="true" -->
 
-- [Postman Collection](#postman-collection)
-- [Fetch set of tags](#fetch-set-of-tags)
-- [Fetch set of "# of users" tags](#fetch-set-of--of-users-tags)
-- [Fetch organizations](#fetch-organizations)
-- [Fetch specific organization](#fetch-specific-organization)
+* [Postman Collection](#postman-collection)
+* [Fetch set of tags](#fetch-set-of-tags)
+* [Fetch set of "# of users" tags](#fetch-set-of--of-users-tags)
+* [Fetch organizations](#fetch-organizations)
+* [Fetch specific organization](#fetch-specific-organization)
 
 <!-- /MarkdownTOC -->
 

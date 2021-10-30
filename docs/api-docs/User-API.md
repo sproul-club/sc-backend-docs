@@ -3,18 +3,18 @@ We use JWTs to manage authentication, mainly for allowing the user to edit their
 
 <!-- MarkdownTOC autolink="true" -->
 
-- [Postman Collection](#postman-collection)
-- [Does email exist? \(before sign up\)](#does-email-exist-before-sign-up)
-- [Is password strong enough? \(before sign up\)](#is-password-strong-enough-before-sign-up)
-- [Register a new user](#register-a-new-user)
-- [Resend confirmation email](#resend-confirmation-email)
-- [Confirm new user](#confirm-new-user)
-- [Login user](#login-user)
-- [Request password reset](#request-password-reset)
-- [Confirm Reset Password](#confirm-reset-password)
-- [Refresh access token](#refresh-access-token)
-- [Revoke access token](#revoke-access-token)
-- [Revoke refresh token](#revoke-refresh-token)
+* [Postman Collection](#postman-collection)
+* [Does email exist? \(before sign up\)](#does-email-exist-before-sign-up)
+* [Is password strong enough? \(before sign up\)](#is-password-strong-enough-before-sign-up)
+* [Register a new user](#register-a-new-user)
+* [Resend confirmation email](#resend-confirmation-email)
+* [Confirm new user](#confirm-new-user)
+* [Login user](#login-user)
+* [Request password reset](#request-password-reset)
+* [Confirm Reset Password](#confirm-reset-password)
+* [Refresh access token](#refresh-access-token)
+* [Revoke access token](#revoke-access-token)
+* [Revoke refresh token](#revoke-refresh-token)
 
 <!-- /MarkdownTOC -->
 

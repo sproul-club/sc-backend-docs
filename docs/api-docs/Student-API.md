@@ -2,23 +2,23 @@
 
 <!-- MarkdownTOC autolink="true" -->
 
-- [Postman Collection](#postman-collection)
-- [Managing Account](#managing-account)
-    - [Login user](#login-user)
-    - [Finish registeration](#finish-registeration)
-    - [Refresh access token](#refresh-access-token)
-    - [Revoke access token](#revoke-access-token)
-    - [Revoke refresh token](#revoke-refresh-token)
-- [Metadata fetching](#metadata-fetching)
-    - [Fetch set of majors](#fetch-set-of-majors)
-    - [Fetch set of minors](#fetch-set-of-minors)
-    - [Fetch set of student years](#fetch-set-of-student-years)
-- [Managing Data](#managing-data)
-    - [Fetch profile info](#fetch-profile-info)
-    - [Edit profile info](#edit-profile-info)
-    - [Add favorite clubs](#add-favorite-clubs)
-    - [Remove favorite clubs](#remove-favorite-clubs)
-    - [Edit club board](#edit-club-board)
+* [Postman Collection](#postman-collection)
+* [Managing Account](#managing-account)
+    * [Login user](#login-user)
+    * [Finish registeration](#finish-registeration)
+    * [Refresh access token](#refresh-access-token)
+    * [Revoke access token](#revoke-access-token)
+    * [Revoke refresh token](#revoke-refresh-token)
+* [Metadata fetching](#metadata-fetching)
+    * [Fetch set of majors](#fetch-set-of-majors)
+    * [Fetch set of minors](#fetch-set-of-minors)
+    * [Fetch set of student years](#fetch-set-of-student-years)
+* [Managing Data](#managing-data)
+    * [Fetch profile info](#fetch-profile-info)
+    * [Edit profile info](#edit-profile-info)
+    * [Add favorite clubs](#add-favorite-clubs)
+    * [Remove favorite clubs](#remove-favorite-clubs)
+    * [Edit club board](#edit-club-board)
 
 <!-- /MarkdownTOC -->
 
@@ -251,8 +251,8 @@ a partial account is made, in which the registeration is expected to finish when
 ```
 
 ### Edit club board
-* Description: Edits club Kanban board data from user. Clubs within each column are sorted alphabetically.
-* Path: `GET /api/student/club-board`
+* Description: Edits club Kanban board data from user. ~~Clubs within each column are sorted alphabetically.~~ (@tankaren 10/28/21 update: FE has no sorting implemented and it doesn't appear to exist in the backend either per Aislin.)
+* Path: `PUT /api/student/club-board`
 * Headers:
     - `Authorization: Bearer <access_token>`
 * Sample body input:
