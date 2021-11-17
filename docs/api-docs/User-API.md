@@ -23,7 +23,7 @@ We use JWTs to manage authentication, mainly for allowing the user to edit their
 
 
 ## Does email exist? (before sign up)
-* Description: Given an email for a potential sign up, check if it exists within to list of scraped CalLink emails?
+* Description: Checks if a given email exists within our list of scraped CalLink emails.
 * Path: `POST /api/user/email-exists`
 * Sample body input:
 ```json
@@ -39,7 +39,8 @@ We use JWTs to manage authentication, mainly for allowing the user to edit their
 ```
 
 ## Is password strong enough? (before sign up)
-* Description: Given a password for a potential sign up, check if it's strong enough
+* **NOTE**: This endpoint needs to be secured or reworked ASAP!!!
+* Description: Checks if a given password is strong enough.
 * Path: `POST /api/user/password-strength`
 * Sample body input:
 ```json
@@ -55,7 +56,7 @@ We use JWTs to manage authentication, mainly for allowing the user to edit their
 ```
 
 ## Register a new user
-* Description: Registers a new user and club pair
+* Description: Registers a new officer user and a corresponding club.
 * Path: `POST /api/user/register`
 * Sample body input:
 ```json
@@ -77,7 +78,7 @@ We use JWTs to manage authentication, mainly for allowing the user to edit their
 ```
 
 ## Resend confirmation email
-* Description: Resends a new confirmation email if the user exists
+* Description: Resends a new confirmation email if the user exists.
 * Path: `POST /api/user/resend-confirm`
 * Sample body input:
 ```json
@@ -93,12 +94,12 @@ We use JWTs to manage authentication, mainly for allowing the user to edit their
 ```
 
 ## Confirm new user
-* Description: Confirms the new user and club pair (this endpoint is normally within an email)
+* Description: Confirms the new officer user. This endpoint link is normally within the confirmation email.
 * Path: `GET /api/user/confirm/<confirm_token>`
-* Result: Redirects you to the club edit profile page (ideally)
+* Result: Redirects you to the club edit profile page
 
 ## Login user
-* Description: Logs in a club admin user
+* Description: Logs in an existing officer user.
 * Path: `POST /api/user/login`
 * Sample body input:
 ```json
@@ -119,7 +120,7 @@ We use JWTs to manage authentication, mainly for allowing the user to edit their
 * Note: `expires_in` values are just example values
 
 ## Request password reset
-* Description: Sends a password confirmation email to the user.
+* Description: Sends a password reset email to the user's email.
 * Path: `POST /api/user/request-reset`
 * Sample body input:
 ```json
@@ -135,7 +136,7 @@ We use JWTs to manage authentication, mainly for allowing the user to edit their
 ```
 
 ## Confirm Reset Password
-* Description: Resets the user's password and revokes all access and refresh tokens.
+* Description: Resets the officer user's password and revokes all existing access and refresh tokens.
 * Path: `POST /api/user/confirm-reset`
 * Sample body input:
 ```json
@@ -152,7 +153,7 @@ We use JWTs to manage authentication, mainly for allowing the user to edit their
 ```
 
 ## Refresh access token
-* Description: Fetches a new access token given a valid refresh token
+* Description: Fetches a new access token given a valid refresh token.
 * Path: `POST /api/user/refresh`
 * Headers:
     - `Authorization: Bearer <refresh_token>`
@@ -166,7 +167,7 @@ We use JWTs to manage authentication, mainly for allowing the user to edit their
 * Note: `expires_in` values are just example values
 
 ## Revoke access token
-* Description: Revokes an issued access token, preventing further use of it
+* Description: Revokes an issued access token, preventing further use of it.
 * Path: `DELETE /api/user/revoke-access`
 * Headers:
     - `Authorization: Bearer <access_token>`
@@ -179,7 +180,7 @@ We use JWTs to manage authentication, mainly for allowing the user to edit their
 ```
 
 ## Revoke refresh token
-* Description: Revokes an issued refresh token, preventing further use of it
+* Description: Revokes an issued refresh token, preventing further use of it.
 * Path: `DELETE /api/user/revoke-refresh`
 * Headers:
     - `Authorization: Bearer <refresh_token>`
