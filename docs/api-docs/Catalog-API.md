@@ -15,7 +15,7 @@
 
 
 ## Fetch set of tags
-* Description: Fetches the set of club tags
+* Description: Fetches the set of club tags.
 * Path: `GET /api/catalog/tags`
 * Sample body output:
 ```json
@@ -32,7 +32,7 @@
 ```
 
 ## Fetch set of "# of users" tags
-* Description: Fetches the set of "number of users" tags
+* Description: Fetches the set of "# of users" tags.
 * Path: `GET /api/catalog/num-user-tags`
 * Sample body output:
 ```json
@@ -75,7 +75,7 @@
 ```
 
 ## Fetch specific organization
-* Description: Fetches all information of a single organization
+* Description: Fetches all information of the requested club organization, including its similarly recommended clubs.
 * Path: `GET /api/catalog/organizations/<org-id>`
 * Sample body output:
 ```json
