@@ -81,7 +81,7 @@
     "access_expires_in": 900
 }
 ```
-* Note: `expires_in` values are just example values
+* Note: `expires_in` values are just example values. Do not assume that the documentation here describes the correct `expires_in` values.
 
 ### Revoke access token
 * Description: Revokes an issued access token, preventing further use of it.

@@ -11,7 +11,7 @@
 <!-- /MarkdownTOC -->
 
 ## Postman Collection
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/8125621e08eb17533248?action=collection%2Fimport)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/22c503354cc0ceb840ab?action=collection%2Fimport)
 
 
 ## Fetch set of tags
