@@ -9,30 +9,30 @@
 * [Upload logo](#upload-logo)
 * [Upload banner](#upload-banner)
 * [Gallery Media](#gallery-media)
-    * [Get gallery media](#get-gallery-media)
+    * [Fetch gallery pictures](#fetch-gallery-pictures)
     * [Add gallery picture](#add-gallery-picture)
     * [Update gallery picture](#update-gallery-picture)
-    * [Delete gallery media](#delete-gallery-media)
+    * [Delete gallery picture](#delete-gallery-picture)
 * [Resources](#resources)
     * [Get resources](#get-resources)
     * [Add resource](#add-resource)
     * [Update resource](#update-resource)
     * [Delete resource](#delete-resource)
 * [Events](#events)
-    * [Get events](#get-events)
+    * [Fetch events](#fetch-events)
     * [Add event](#add-event)
     * [Update event](#update-event)
     * [Delete event](#delete-event)
 * [Recruiting Events](#recruiting-events)
-    * [Get recruiting events](#get-recruiting-events)
+    * [Fetch recruiting events](#fetch-recruiting-events)
     * [Add recruiting event](#add-recruiting-event)
-    * [Update recruiting nevent](#update-recruiting-nevent)
+    * [Update recruiting event](#update-recruiting-event)
     * [Delete recruiting event](#delete-recruiting-event)
 
 <!-- /MarkdownTOC -->
 
 ## Postman Collection
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/d94f6e43c7f713013796)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/d94f6e43c7f713013796?action=collection%2Fimport)
 
 ## Fetch profile info
 * Description: Fetches the complete club profile from an officer user.
@@ -201,8 +201,8 @@
 
 ## Gallery Media
 
-### Get gallery media
-* Description: Fetches all gallery pictures' metadata from a club. Each media object has an ID, URL, and caption.
+### Fetch gallery pictures
+* Description: Fetches all gallery pictures' metadata from a club.
 * Path: `GET /api/admin/gallery-media`
 * Headers:
     - `Authorization: Bearer <access_token>`
@@ -275,7 +275,7 @@
 ]
 ```
 
-### Delete gallery media
+### Delete gallery picture
 * Description: Deletes an existing gallery picture.
 * Path: `DELETE /api/admin/gallery-media/<media-id>`
 * Headers:
@@ -383,7 +383,7 @@
 
 ## Events
 
-### Get events
+### Fetch events
 * Description: Fetches all events from the club profile.
 * Path: `GET /api/admin/events`
 * Headers:
@@ -497,7 +497,7 @@
 
 ## Recruiting Events
 
-### Get recruiting events
+### Fetch recruiting events
 * Description: Fetches all recruiting events from the club profile.
 * Path: `GET /api/admin/recruiting-events`
 * Headers:
@@ -561,7 +561,7 @@
 ]
 ```
 
-### Update recruiting nevent
+### Update recruiting event
 * Description: Updates an existing recruiting event.
 * Path: `PUT /api/admin/recruiting-events/<event-id>`
 * Headers:

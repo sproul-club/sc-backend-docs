@@ -11,7 +11,7 @@ We use JWTs to manage authentication, mainly for allowing the user to edit their
 * [Confirm new user](#confirm-new-user)
 * [Login user](#login-user)
 * [Request password reset](#request-password-reset)
-* [Confirm Reset Password](#confirm-reset-password)
+* [Confirm password reset](#confirm-password-reset)
 * [Refresh access token](#refresh-access-token)
 * [Revoke access token](#revoke-access-token)
 * [Revoke refresh token](#revoke-refresh-token)
@@ -19,7 +19,7 @@ We use JWTs to manage authentication, mainly for allowing the user to edit their
 <!-- /MarkdownTOC -->
 
 ## Postman Collection
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9313a243aa286cd566dd)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9313a243aa286cd566dd?action=collection%2Fimport)
 
 
 ## Does email exist? (before sign up)
@@ -28,7 +28,7 @@ We use JWTs to manage authentication, mainly for allowing the user to edit their
 * Sample body input:
 ```json
 {
-    "email": "exampleuser@berkeley.edu",
+    "email": "exampleuser@berkeley.edu"
 }
 ```
 * Sample body output:
@@ -45,7 +45,7 @@ We use JWTs to manage authentication, mainly for allowing the user to edit their
 * Sample body input:
 ```json
 {
-    "password": "p@ssw0rd!",
+    "password": "p@ssw0rd!"
 }
 ```
 * Sample body output:
@@ -117,7 +117,7 @@ We use JWTs to manage authentication, mainly for allowing the user to edit their
     "refresh_expires_in": 86400
 }
 ```
-* Note: `expires_in` values are just example values
+* Note: `expires_in` values are just example values. Do not assume that the documentation here describes the correct `expires_in` values.
 
 ## Request password reset
 * Description: Sends a password reset email to the user's email.
@@ -135,7 +135,7 @@ We use JWTs to manage authentication, mainly for allowing the user to edit their
 }
 ```
 
-## Confirm Reset Password
+## Confirm password reset
 * Description: Resets the officer user's password and revokes all existing access and refresh tokens.
 * Path: `POST /api/user/confirm-reset`
 * Sample body input:
@@ -164,7 +164,7 @@ We use JWTs to manage authentication, mainly for allowing the user to edit their
     "access_expires_in": 900
 }
 ```
-* Note: `expires_in` values are just example values
+* Note: `expires_in` values are just example values. Do not assume that the documentation here describes the correct `expires_in` values.
 
 ## Revoke access token
 * Description: Revokes an issued access token, preventing further use of it.

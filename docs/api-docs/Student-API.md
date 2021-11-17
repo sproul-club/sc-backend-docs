@@ -23,7 +23,7 @@
 <!-- /MarkdownTOC -->
 
 ## Postman Collection
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e9d0784bab2cc5792865)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e9d0784bab2cc5792865?action=collection%2Fimport)
 
 ## Managing Account
 

@@ -5,13 +5,13 @@
 * [Postman Collection](#postman-collection)
 * [Fetch set of tags](#fetch-set-of-tags)
 * [Fetch set of "# of users" tags](#fetch-set-of--of-users-tags)
-* [Fetch organizations](#fetch-organizations)
+* [Fetch all organizations \(unfiltered\)](#fetch-all-organizations-unfiltered)
 * [Fetch specific organization](#fetch-specific-organization)
 
 <!-- /MarkdownTOC -->
 
 ## Postman Collection
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/8125621e08eb17533248)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/8125621e08eb17533248?action=collection%2Fimport)
 
 
 ## Fetch set of tags
@@ -48,7 +48,7 @@
 ]
 ```
 
-## Fetch organizations
+## Fetch all organizations (unfiltered)
 * Description: Fetches the list of organizations without filters, sorted alphabetically.
 * Path: `GET /api/catalog/organizations?limit={limit}&skip={skip}`
 
