@@ -5,6 +5,7 @@
 * [Postman Collection](#postman-collection)
 * [Fetch profile info](#fetch-profile-info)
 * [Edit profile info](#edit-profile-info)
+* [Change password](#change-password)
 * [Upload logo](#upload-logo)
 * [Upload banner](#upload-banner)
 * [Gallery Media](#gallery-media)
@@ -27,7 +28,6 @@
     * [Add recruiting event](#add-recruiting-event)
     * [Update recruiting nevent](#update-recruiting-nevent)
     * [Delete recruiting event](#delete-recruiting-event)
-* [Change password](#change-password)
 
 <!-- /MarkdownTOC -->
 
@@ -35,7 +35,7 @@
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/d94f6e43c7f713013796)
 
 ## Fetch profile info
-* Description: Fetches the complete club profile information
+* Description: Fetches the complete club profile from an officer user.
 * Path: `GET /api/admin/profile`
 * Headers:
     - `Authorization: Bearer <access_token>`
@@ -103,7 +103,7 @@
 ```
 
 ## Edit profile info
-* Description: Edits the club profile information
+* Description: Edits the club profile.
 * Path: `POST /api/admin/profile`
 * Headers:
     - `Authorization: Bearer <access_token>`
@@ -148,8 +148,27 @@
 }
 ```
 
+## Change password
+* Description: Changes the current user's password without revoking all the access and refresh tokens.
+* Path: `POST /api/admin/change-password`
+* Headers:
+    - `Authorization: Bearer <access_token>`
+* Sample body input:
+```json
+{
+    "old_password": "exampleoldpassword",
+    "new_password": "examplenewpassword",
+}
+```
+* Sample body output:
+```json
+{
+    "status": "success"
+}
+```
+
 ## Upload logo
-* Description: Uploads the logo. Logos must respect a 1:1 aspect ratio. A 16 MB limit is imposed as well
+* Description: Replaces the current club's logo with a new one. Logos must respect a 1:1 aspect ratio (with a 5% deviation allowed). A 2 MB limit is imposed as well.
 * Path: `POST /api/admin/upload-logo`
 * Headers:
     - `Authorization: Bearer <access_token>`
@@ -165,7 +184,7 @@
 ```
 
 ## Upload banner
-* Description: Uploads the banner. banners must respect a 10:3 aspect ratio. A 16 MB limit is imposed as well
+* Description: Replaces the current club's banner with a new one. Banners must respect a 10:3 aspect ratio (with a 5% deviation allowed). A 2 MB limit is imposed as well.
 * Path: `POST /api/admin/upload-banner`
 * Headers:
     - `Authorization: Bearer <access_token>`
@@ -183,7 +202,7 @@
 ## Gallery Media
 
 ### Get gallery media
-* Description: Gets all gallery media (text only) from a club
+* Description: Fetches all gallery pictures' metadata from a club. Each media object has an ID, URL, and caption.
 * Path: `GET /api/admin/gallery-media`
 * Headers:
     - `Authorization: Bearer <access_token>`
@@ -199,7 +218,7 @@
 ```
 
 ### Add gallery picture
-* Description: Adds a gallery picture to the club
+* Description: Adds a new gallery picture to the club with an image upload and a caption.
 * Path: `POST /api/admin/gallery-media/photo`
 * Headers:
     - `Authorization: Bearer <access_token>`
@@ -228,7 +247,7 @@
 ```
 
 ### Update gallery picture
-* Description: Updates a gallery picture from the club
+* Description: Either replace an existing gallery picture, change the image's caption or do both at the same time.
 * Path: `PUT /api/admin/gallery-media/photo/<pic-id>`
 * Headers:
     - `Authorization: Bearer <access_token>`
@@ -257,7 +276,7 @@
 ```
 
 ### Delete gallery media
-* Description: Deletes a gallery media from the club
+* Description: Deletes an existing gallery picture.
 * Path: `DELETE /api/admin/gallery-media/<media-id>`
 * Headers:
     - `Authorization: Bearer <access_token>`
@@ -275,7 +294,7 @@
 ## Resources
 
 ### Get resources
-* Description: Gets all resources from a club
+* Description: Fetches all the resource links from a club.
 * Path: `GET /api/admin/resources`
 * Headers:
     - `Authorization: Bearer <access_token>`
@@ -291,7 +310,7 @@
 ```
 
 ### Add resource
-* Description: Adds a resource to the club
+* Description: Adds a new resource link to the club profile.
 * Path: `POST /api/admin/resources`
 * Headers:
     - `Authorization: Bearer <access_token>`
@@ -319,7 +338,7 @@
 ```
 
 ### Update resource
-* Description: Updates a resource from the club
+* Description: Updates an existing resource link.
 * Path: `PUT /api/admin/resources/<resource-id>`
 * Headers:
     - `Authorization: Bearer <access_token>`
@@ -347,7 +366,7 @@
 ```
 
 ### Delete resource
-* Description: Deletes a resource from the club
+* Description: Deletes an existing resource link.
 * Path: `DELETE /api/admin/resources/<resource-id>`
 * Headers:
     - `Authorization: Bearer <access_token>`
@@ -365,7 +384,7 @@
 ## Events
 
 ### Get events
-* Description: Gets all events from a club
+* Description: Fetches all events from the club profile.
 * Path: `GET /api/admin/events`
 * Headers:
     - `Authorization: Bearer <access_token>`
@@ -384,7 +403,7 @@
 ```
 
 ### Add event
-* Description: Adds a event to the club
+* Description: Adds a new event.
 * Path: `POST /api/admin/events`
 * Headers:
     - `Authorization: Bearer <access_token>`
@@ -421,7 +440,7 @@
 ```
 
 ### Update event
-* Description: Updates a event from the club
+* Description: Updates an existing event.
 * Path: `PUT /api/admin/events/<event-id>`
 * Headers:
     - `Authorization: Bearer <access_token>`
@@ -458,7 +477,7 @@
 ```
 
 ### Delete event
-* Description: Deletes a event from the club
+* Description: Deletes an existing event.
 * Path: `DELETE /api/admin/events/<event-id>`
 * Headers:
     - `Authorization: Bearer <access_token>`
@@ -479,7 +498,7 @@
 ## Recruiting Events
 
 ### Get recruiting events
-* Description: Gets all recruiting events from a club
+* Description: Fetches all recruiting events from the club profile.
 * Path: `GET /api/admin/recruiting-events`
 * Headers:
     - `Authorization: Bearer <access_token>`
@@ -500,7 +519,7 @@
 ```
 
 ### Add recruiting event
-* Description: Adds a recruiting event to the club
+* Description: Adds a new recruiting event.
 * Path: `POST /api/admin/recruiting-events`
 * Headers:
     - `Authorization: Bearer <access_token>`
@@ -543,7 +562,7 @@
 ```
 
 ### Update recruiting nevent
-* Description: Updates a recruiting nevent from the club
+* Description: Updates an existing recruiting event.
 * Path: `PUT /api/admin/recruiting-events/<event-id>`
 * Headers:
     - `Authorization: Bearer <access_token>`
@@ -586,7 +605,7 @@
 ```
 
 ### Delete recruiting event
-* Description: Deletes a recruiting event from the club
+* Description: Deletes an existing recruiting event.
 * Path: `DELETE /api/admin/recruiting-events/<event-id>`
 * Headers:
     - `Authorization: Bearer <access_token>`
@@ -604,23 +623,4 @@
         "description": "This is something about the new event."
     }
 ]
-```
-
-## Change password
-* Description: Changes the current user's password without revoking all the access and refresh tokens
-* Path: `POST /api/admin/change-password`
-* Headers:
-    - `Authorization: Bearer <access_token>`
-* Sample body input:
-```json
-{
-    "old_password": "exampleoldpassword",
-    "new_password": "examplenewpassword",
-}
-```
-* Sample body output:
-```json
-{
-    "status": "success"
-}
 ```
