@@ -28,10 +28,9 @@
 ## Managing Account
 
 ### Login user
-* Description: Logs in a student user via Google OAuth w/ CalNet integration
+* Description: Logs in a student user via Google OAuth w/ CalNet integration.
 * Path: `POST /api/student/login`
-* Result: Redirects user to CalNet sign in page if not logged in recently, if at all. If the user never had an account before,
-a partial account is made, in which the registeration is expected to finish when `/finish-register` is called. If there is an account, it should lead you to the Student Dashboard.
+* Result: Redirects user to CalNet sign in page if not logged in recently, if at all. If the user never had an account before, a partial account is made, in which the registeration is expected to finish when `/finish-register` is called. If there is an account, it should lead them to the Student Dashboard.
 * Sample body output:
 ```json
 {
@@ -50,7 +49,7 @@ a partial account is made, in which the registeration is expected to finish when
 ```
 
 ### Finish registeration
-* Description:
+* Description: Finishes registeration of the student user with additional details of them. This is usually called after the student successfully logged in via CalNet.
 * Path: `POST /api/student/finish-register`
 * Headers:
     - `Authorization: Bearer <refresh_token>`
@@ -71,7 +70,7 @@ a partial account is made, in which the registeration is expected to finish when
 ```
 
 ### Refresh access token
-* Description: Fetches a new access token given a valid refresh token
+* Description: Fetches a new access token given a valid refresh token.
 * Path: `POST /api/student/refresh`
 * Headers:
     - `Authorization: Bearer <refresh_token>`
@@ -85,7 +84,7 @@ a partial account is made, in which the registeration is expected to finish when
 * Note: `expires_in` values are just example values
 
 ### Revoke access token
-* Description: Revokes an issued access token, preventing further use of it
+* Description: Revokes an issued access token, preventing further use of it.
 * Path: `DELETE /api/student/revoke-access`
 * Headers:
     - `Authorization: Bearer <access_token>`
@@ -98,7 +97,7 @@ a partial account is made, in which the registeration is expected to finish when
 ```
 
 ### Revoke refresh token
-* Description: Revokes an issued refresh token, preventing further use of it
+* Description: Revokes an issued refresh token, preventing further use of it.
 * Path: `DELETE /api/student/revoke-refresh`
 * Headers:
     - `Authorization: Bearer <refresh_token>`
@@ -113,7 +112,7 @@ a partial account is made, in which the registeration is expected to finish when
 ## Metadata fetching
 
 ### Fetch set of majors
-* Description: Fetches the set of majors
+* Description: Fetches the set of majors in UC Berkeley.
 * Path: `GET /api/student/majors`
 * Sample body output:
 ```json
@@ -130,7 +129,7 @@ a partial account is made, in which the registeration is expected to finish when
 ```
 
 ### Fetch set of minors
-* Description: Fetches the set of minors
+* Description: Fetches the set of minors in UC Berkeley.
 * Path: `GET /api/student/minors`
 * Sample body output:
 ```json
@@ -147,7 +146,7 @@ a partial account is made, in which the registeration is expected to finish when
 ```
 
 ### Fetch set of student years
-* Description: Fetches the set of student years
+* Description: Fetches the set of student years.
 * Path: `GET /api/student/years`
 * Sample body output:
 ```json
@@ -166,7 +165,7 @@ a partial account is made, in which the registeration is expected to finish when
 ## Managing Data
 
 ### Fetch profile info
-* Description: Fetches the complete student profile
+* Description: Fetches the complete student profile.
 * Path: `GET /api/student/profile`
 * Headers:
     - `Authorization: Bearer <access_token>`
@@ -189,7 +188,7 @@ a partial account is made, in which the registeration is expected to finish when
 
 
 ### Edit profile info
-* Description: Edits the student profile information
+* Description: Edits the student profile.
 * Path: `POST /api/student/profile`
 * Headers:
     - `Authorization: Bearer <access_token>`
@@ -209,7 +208,7 @@ a partial account is made, in which the registeration is expected to finish when
 ```
 
 ### Add favorite clubs
-* Description: Add favorite clubs for user. Ordering is preserved based on *when* they favorited.
+* Description: Adds favorite club(s) for student user. Ordering is preserved based on *when* they favorited.
 * Path: `POST /api/student/favorite-clubs`
 * Headers:
     - `Authorization: Bearer <access_token>`
@@ -231,7 +230,7 @@ a partial account is made, in which the registeration is expected to finish when
 ```
 
 ### Remove favorite clubs
-* Description: Remove favorite clubs for user. Ordering is preserved based on *when* they favorited.
+* Description: Removes favorite club(s) for student user.
 * Path: `DELETE /api/student/favorite-clubs`
 * Headers:
     - `Authorization: Bearer <access_token>`
@@ -251,7 +250,7 @@ a partial account is made, in which the registeration is expected to finish when
 ```
 
 ### Edit club board
-* Description: Edits club Kanban board data from user. ~~Clubs within each column are sorted alphabetically.~~ (@tankaren 10/28/21 update: FE has no sorting implemented and it doesn't appear to exist in the backend either per Aislin.)
+* Description: Edits club Kanban board. ~~Clubs within each column are sorted alphabetically.~~ (@tankaren 10/28/21 update: FE has no sorting implemented and it doesn't appear to exist in the backend either per Aislin.)
 * Path: `PUT /api/student/club-board`
 * Headers:
     - `Authorization: Bearer <access_token>`
