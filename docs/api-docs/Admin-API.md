@@ -624,3 +624,66 @@
     }
 ]
 ```
+
+## Frequently Asked Questions
+
+### Fetch frequently asked questions
+* Description: Fetches all questions and answers from the club profile.
+* Path: `GET /api/admin/faq`
+* Headers:
+    - `Authorization: Bearer <access_token>`
+* Sample body output:
+```json
+[
+    {
+        "id": "example-question-1",
+        "question": "Example question 1",
+        "answer": "Example answer 1"
+    }
+]
+```
+
+### Add question
+* Description: Adds a new question.
+* Path: `POST /api/admin/faq`
+* Headers:
+    - `Authorization: Bearer <access_token>`
+* Sample body input:
+```json
+{
+        "id": "example-question-2",
+        "question": "Example question 2",
+        "answer": "Example answer 2"
+}
+```
+* Sample body output:
+```json
+[
+    {
+        "id": "example-question-1",
+        "question": "Example question 1",
+        "answer": "Example answer 1"
+    },
+    {
+        "id": "example-question-2",
+        "question": "Example question 2",
+        "answer": "Example answer 2"
+    }
+]
+```
+
+### Delete question
+* Description: Deletes an existing question.
+* Path: `DELETE /api/admin/faq/<question-id>`
+* Headers:
+    - `Authorization: Bearer <access_token>`
+* Sample body output:
+```json
+[
+    {
+        "id": "example-question-1",
+        "question": "Example question 1",
+        "answer": "Example answer 1"
+    }
+]
+```
