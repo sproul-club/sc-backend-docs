@@ -6,6 +6,7 @@ Table of Contents:
 <!-- MarkdownTOC -->
 
 * [Installation / Setup](#installation--setup)
+    * [Handling environments](#handling-environments)
     * [Recommended third-party tools](#recommended-third-party-tools)
 * [How does the project work?](#how-does-the-project-work)
     * [Service Architecture](#service-architecture)
@@ -44,7 +45,7 @@ The main steps for setting this up on your machine is as follows:
 2. Setup a new Python 3 virtual environment
 3. Install the required dependencies...*within the environment!*
 4. Create the environment file
-5. Run the application
+5. Run the application via `MODE={env} python app.py`, where `{env}` is the environment name. [Read below](#handling-environments) for a more detailed explanation.
 
 I won't go over how to handle steps 1-3 since each platform (Windows, Mac, or Linux) has its own specific setup. As for setting up the environment file, here's the environment variables required to run the application:
 
@@ -78,9 +79,13 @@ GOOGLE_OAUTH_CLIENT_SECRET=
 
 You'll be provided the values of these environment variables by your lead developer.
 
-The name of this environment file depends on the type of environment you're setting up: either Production (`prod`), Staging (`staging`), Development (`dev`), or Local (`local`). For example, if we wanted to setup the *development* environment, you would name your environment file to `.env.dev`, with the codename appended at the end of the filename. Similarly, to setup the *production* environment, you would name your environment file to `.env.prod`.
+## Handling environments
+
+The name of this environment file depends on the type of environment you're setting up: either Production (`prod`), Staging (`staging`), Development (`dev`), or Local (`local`). For example, if we wanted to setup the *development* environment, you would name your environment file to `.env.dev`, with the codename appended at the end of the filename, and you would run the application with the command `MODE=dev python app.py`. Similarly, to setup the *production* environment, you would name your environment file to `.env.prod` and the corresponding command would be `MODE=prod python app.py`.
 
 For context, you'll typically only setup the **`local`** environment on your machine. The `local` environment is used when you're running both frontend and backend applications on your machine and the other environments correspond to the respective applications hosted on Heroku. The main reason the naming of these environment files is important is that each environment configuration will control what database is being loaded, how email links are formatted, and where those email links redirect you when resetting your password or confirming your account.
+
+The supported environments are `local`, `dev`, `staging`, and `prod`.
 
 ## Recommended third-party tools
 
