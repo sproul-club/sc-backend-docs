@@ -28,11 +28,16 @@
     * [Add recruiting event](#add-recruiting-event)
     * [Update recruiting event](#update-recruiting-event)
     * [Delete recruiting event](#delete-recruiting-event)
+* [Frequently Asked Questions](#frequently-asked-questions)
+    * [Fetch frequently asked questions](#fetch-frequently-asked-questions)
+    * [Add question](#add-question)
+    * [Delete question](#delete-question)
 
 <!-- /MarkdownTOC -->
 
 ## Postman Collection
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/d94f6e43c7f713013796?action=collection%2Fimport)
+
 
 ## Fetch profile info
 * Description: Fetches the complete club profile from an officer user.

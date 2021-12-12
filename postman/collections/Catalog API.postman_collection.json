@@ -1,0 +1,126 @@
+{
+	"info": {
+		"_postman_id": "c9a3b4f0-e21a-4b6f-9eac-2d978f9331f0",
+		"name": "Catalog API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Fetch set of tags",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/catalog/tags",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"catalog",
+						"tags"
+					]
+				},
+				"description": "Fetches the set of club tags"
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch set of \"# of users\" tags",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/catalog/num-user-tags",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"catalog",
+						"num-user-tags"
+					]
+				},
+				"description": "Fetches the set of \"# of users\" tags."
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch all organizations (unfiltered)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/catalog/organizations?limit=50&skip=0",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"catalog",
+						"organizations"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "50"
+						},
+						{
+							"key": "skip",
+							"value": "0"
+						}
+					]
+				},
+				"description": "Fetches the list of organizations without filters, sorted alphabetically."
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch specific organization (no access token)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/catalog/organizations/allen-fanclub",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"catalog",
+						"organizations",
+						"allen-fanclub"
+					]
+				},
+				"description": "Fetches all information of the requested club organization, including its similarly recommended clubs. Since a student user access token isn't provided, there's no user to save the club to its visited club history."
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch specific organization (w/ access token)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/catalog/organizations/allen-fanclub",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"catalog",
+						"organizations",
+						"allen-fanclub"
+					]
+				},
+				"description": "Fetches all information of the requested club organization, including its similarly recommended clubs. Since a student user access token is provided, the club is saved to the user's its visited club history."
+			},
+			"response": []
+		}
+	]
+}

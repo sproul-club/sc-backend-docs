@@ -1,0 +1,383 @@
+{
+	"info": {
+		"_postman_id": "a44a14d1-300f-44d5-aa2c-15ace1a59b2d",
+		"name": "User API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Does email exist? (before sign up)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"tejashah88@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/user/email-exists",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"user",
+						"email-exists"
+					]
+				},
+				"description": "Checks if a given email exists within our list of scraped CalLink emails."
+			},
+			"response": []
+		},
+		{
+			"name": "Is password strong enough? (before sign up)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\": \"p@ssw0rd!\"\n}"
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/user/password-strength",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"user",
+						"password-strength"
+					]
+				},
+				"description": "Checks if a given password is strong enough."
+			},
+			"response": []
+		},
+		{
+			"name": "Register a new user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Vulcan Fan Club\",\n\t\"email\": \"tejashah88@gmail.com\",\n\t\"password\": \"test123!\",\n\t\"tags\": [1, 2, 3],\n\t\"app_required\": true,\n\t\"new_members\": true,\n    \"num_users\": 0\n}"
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/user/register",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"user",
+						"register"
+					]
+				},
+				"description": "Registers a new officer user and a corresponding club."
+			},
+			"response": []
+		},
+		{
+			"name": "Resend confirmation email",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"tejashah88@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/user/resend-confirm",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"user",
+						"resend-confirm"
+					]
+				},
+				"description": "Resends a new confirmation email if the user exists."
+			},
+			"response": []
+		},
+		{
+			"name": "Confirm new user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/user/confirm/<insert-confirm-token-here>",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"user",
+						"confirm",
+						"<insert-confirm-token-here>"
+					]
+				},
+				"description": "Confirms the new officer user. This endpoint link is normally within the confirmation email."
+			},
+			"response": []
+		},
+		{
+			"name": "Login user",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.environment.set('ACCESS_TOKEN', jsonData.access);",
+							"pm.environment.set('REFRESH_TOKEN', jsonData.refresh);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"tejashah88@gmail.com\",\n\t\"password\": \"test123!\"\n}"
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/user/login",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"user",
+						"login"
+					]
+				},
+				"description": "Logs in an existing officer user."
+			},
+			"response": []
+		},
+		{
+			"name": "Request password reset",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"tejashah88@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/user/request-reset",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"user",
+						"request-reset"
+					]
+				},
+				"description": "Sends a password reset email to the user's email."
+			},
+			"response": []
+		},
+		{
+			"name": "Confirm password reset",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\": \"InRlamFzaGFoODhAZ21haWwuY29tIg.X0Q0aQ.5GUo7bRz-eDcriIWT46KEIV9UDk\",\n\t\"password\": \"test123!\"\n}"
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/user/confirm-reset",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"user",
+						"confirm-reset"
+					]
+				},
+				"description": "Resets the officer user's password and revokes all existing access and refresh tokens."
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh access token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.environment.set('ACCESS_TOKEN', jsonData.access);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{REFRESH_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/user/refresh",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"user",
+						"refresh"
+					]
+				},
+				"description": "Fetches a new access token given a valid refresh token."
+			},
+			"response": []
+		},
+		{
+			"name": "Revoke access token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.unset('ACCESS_TOKEN');"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/user/revoke-access",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"user",
+						"revoke-access"
+					]
+				},
+				"description": "Revokes an issued access token, preventing further use of it."
+			},
+			"response": []
+		},
+		{
+			"name": "Revoke refresh token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.unset('REFRESH_TOKEN');"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{REFRESH_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/user/revoke-refresh",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"user",
+						"revoke-refresh"
+					]
+				},
+				"description": "Revokes an issued refresh token, preventing further use of it."
+			},
+			"response": []
+		}
+	]
+}

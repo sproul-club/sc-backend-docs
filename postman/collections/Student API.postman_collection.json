@@ -1,0 +1,460 @@
+{
+	"info": {
+		"_postman_id": "eb1ca524-54cf-4faf-b0d7-64ae4dcaa7a8",
+		"name": "Student API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/student/login",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"student",
+						"login"
+					]
+				},
+				"description": "Logs in a student user via Google OAuth w/ CalNet integration."
+			},
+			"response": []
+		},
+		{
+			"name": "Finish registeration",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"tejashah88@gmail.com\",\n    \"majors\": [2, 7, 3],\n    \"minors\": [3, 1, 4],\n    \"interests\": [6, 2, 8],\n    \"year\": 2\n}"
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/student/finish-register",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"student",
+						"finish-register"
+					]
+				},
+				"description": "Finishes registeration of the student user with additional details of them. This is usually called after the student successfully logged in via CalNet."
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh access token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.environment.set('ACCESS_TOKEN', jsonData.access);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{REFRESH_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/student/refresh",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"student",
+						"refresh"
+					]
+				},
+				"description": "Fetches a new access token given a valid refresh token."
+			},
+			"response": []
+		},
+		{
+			"name": "Revoke access token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.unset('ACCESS_TOKEN');"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/student/revoke-access",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"student",
+						"revoke-access"
+					]
+				},
+				"description": "Revokes an issued access token, preventing further use of it."
+			},
+			"response": []
+		},
+		{
+			"name": "Revoke refresh token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.unset('REFRESH_TOKEN');"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{REFRESH_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/student/revoke-refresh",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"student",
+						"revoke-refresh"
+					]
+				},
+				"description": "Revokes an issued refresh token, preventing further use of it."
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch set of majors",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/student/majors",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"student",
+						"majors"
+					]
+				},
+				"description": "Fetches the set of majors in UC Berkeley."
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch set of minors",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/student/minors",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"student",
+						"minors"
+					]
+				},
+				"description": "Fetches the set of minors in UC Berkeley."
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch set of student years",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/student/years",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"student",
+						"years"
+					]
+				},
+				"description": "Fetches the set of student years."
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch profile info",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/student/profile",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"student",
+						"profile"
+					]
+				},
+				"description": "Fetches the complete student profile."
+			},
+			"response": []
+		},
+		{
+			"name": "Edit profile info",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"majors\": [2, 7, 3],\n    \"minors\": [3, 1, 4],\n    \"interests\": [6, 2, 8]\n}"
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/student/profile",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"student",
+						"profile"
+					]
+				},
+				"description": "Edits the student profile."
+			},
+			"response": []
+		},
+		{
+			"name": "Add Favorite Clubs",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"clubs\": [\"karasuno-high-volleyball\", \"allen-fanclub\"]\n}"
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/student/favorite-clubs",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"student",
+						"favorite-clubs"
+					]
+				},
+				"description": "Adds favorite club(s) for student user. Ordering is preserved based on *when* they favorited."
+			},
+			"response": []
+		},
+		{
+			"name": "Remove favorite clubs",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"clubs\": [\"allen-fanclub\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/student/favorite-clubs",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"student",
+						"favorite-clubs"
+					]
+				},
+				"description": "Removes favorite club(s) for student user."
+			},
+			"response": []
+		},
+		{
+			"name": "Edit club board",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"interested_clubs\": [\"example-club-5\"],\n    \"applied_clubs\": [\"example-club-2\", \"example-club-3\", \"example-club-9\"],\n    \"interviewed_clubs\": [\"example-club-7\"]\n}"
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/student/club-board",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"student",
+						"club-board"
+					]
+				},
+				"description": "Edits club Kanban board. ~~Clubs within each column are sorted alphabetically.~~ (@tankaren 10/28/21 update: FE has no sorting implemented and it doesn't appear to exist in the backend either per Aislin.)"
+			},
+			"response": []
+		}
+	]
+}

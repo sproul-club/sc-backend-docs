@@ -31,6 +31,12 @@ Table of Contents:
         * [How to \(efficiently\) implement decorators?](#how-to-efficiently-implement-decorators)
     * [Extending functionality with Flask middleware](#extending-functionality-with-flask-middleware)
     * [A primer on 3rd-party services](#a-primer-on-3rd-party-services)
+* [Working with 3rd-party tools/services](#working-with-3rd-party-toolsservices)
+    * [Working with Postman](#working-with-postman)
+        * [Setting it up](#setting-it-up)
+        * [Using it](#using-it)
+    * [Logging into Sentry.io](#logging-into-sentryio)
+* [Working with the API](#working-with-the-api)
 * [API Documentation](#api-documentation)
     * [Base URLs](#base-urls)
     * [API categories](#api-categories)
@@ -46,6 +52,8 @@ The main steps for setting this up on your machine is as follows:
 3. Install the required dependencies...*within the environment!*
 4. Create the environment file
 5. Run the application via `MODE={env} python app.py`, where `{env}` is the environment name. [Read below](#handling-environments) for a more detailed explanation.
+6. Set-up your own club account and log-in! (See [here](#working-with-the-api) for doing that)
+7. Happy developing! :)
 
 I won't go over how to handle steps 1-3 since each platform (Windows, Mac, or Linux) has its own specific setup. As for setting up the environment file, here's the environment variables required to run the application:
 
@@ -98,6 +106,8 @@ While you're totally fine to start developing right away, there's a few tools th
 * [**Postman**](https://www.postman.com) - Postman is a service that allows developers to test their APIs with a desktop app providing an easy-to-use interface. It's helpful when you need to test your API calls without having to write lengthy cURL requests on your terminal. We use Postman to maintain a set of API collections for backend, where you can easily test the API within the desktop app. You can checkout those collections by [checking out the API Documentation](#api-documentation) and selecting one the major API categories and then clicking the "Run in Postman" button.
 
     ![Example of Postman View](images/postman-example-view.png "Example of Postman View")
+
+    Click [here](#working-with-postman) to check out how to interact with the sproul.club API via Postman.
 
 * **Any desktop Git client** - While you may have learned about using the `git` CLI to make commits and push them to various repositories, I've personally found desktop Git clients to be helpful for boosting productivity. These desktop apps provide a visual interface to see how the commits within the branches of a repository are lined up, and it makes it easy to make your own commits without memorizing the commands.
 
@@ -513,9 +523,69 @@ Before we jump into the internals of the project, we need to talk about the vari
     ![Relational vs Document-based storage](images/relational-vs-document-db-example.png "Relational vs Document-based storage")
 
 * [**MongoDB Atlas**](https://www.mongodb.com/atlas) - MongoDB Atlas is MongoDB's "Database-as-a-service" (DBaaS) offering, which lets you host a MongoDB instance under their name. It lets us not worry about the finer details of having a server specifically for hosting MongoDB so that we only have to deal with the database itself. You'll most likely not be touching Atlas dashboard though.
+
 * [**Sentry**](https://sentry.io) - Sentry allows us to track uncaught exceptions and also do performance monitoring by capturing the incoming request and outgoing response for each error caught. We use their dashboard to analyze the frequency of these requests as well as see if they are from the same user, same browser and so on. You'll most likely be using the dashboard to see what errors have popped up in the production version of your app.
 
     ![Example Sentry Dashboard](images/sentry-dashboard.png "Example Sentry Dashboard")
+
+    Click [here](#logging-into-sentryio) to check out how to log into our sentry.io dashboard and check out the errors recorded.
+
+# Working with 3rd-party tools/services
+
+## Working with Postman
+
+### Setting it up
+
+1. Download the [zip file](https://github.com/sproul-club/sc-backend-docs/tree/main/postman/postman-export.zip) in the `postman/` folder and extract it in a convenient place.
+2. Open up Postman
+3. On the top-left corner, click on "Import..."
+
+![Postman setup - Step 3 - Import](images/postman-setup-3-import.png)
+
+4. Click on the "Folder" tab and select the extracted folder
+
+![Postman setup - Step 4 - Folder](images/postman-setup-4-folder.png)
+
+5. Make sure that you can see 5 collections and 4 environments, similar to below...
+
+![Postman setup - Step 5 - Select](images/postman-setup-5-select.png)
+
+6. After the importing process is done, this is what you should be seeing...
+
+![Postman setup - Step 6 - Results](images/postman-setup-6-results.png)
+
+### Using it
+
+Here's a set of videos to get started with Postman. Normally I'd write up the guide but these videos do the job just as well.
+
+1. Sending API requests - https://www.youtube.com/watch?v=8mBmLDbpIH8 (3:39)
+2. Analyzing API responses - https://www.youtube.com/watch?v=31wBZyBdbgw (2:58)
+3. Working with environments - https://www.youtube.com/watch?v=oCEDjp3XMco (4:28)
+4. (Optional) Working with variables - https://www.youtube.com/watch?v=BKLC-_C9fxE (10:40)
+
+As for working with the sproul.club APIs in Postman...
+1. Set the environment on the top-right corner to "Local Environment"
+2. Register and log-in for your club account (see [here](#working-with-the-api) for how to do that)
+
+
+## Logging into Sentry.io
+
+1. Go to [this link](https://sentry.io/organizations/sproulclub/issues/?project=5392072) to access the sproul.club backend sentry project
+2. Log in via the credentials in the secret location ;)
+3. On the left-hand side, the "Issues" tab should be highlighted, otherwise click on it
+
+# Working with the API
+
+Before you can actually work with the APIs, you'll need to create your own club account on the **dev** server and database. I'd highly recommend [setting up Postman](#working-with-postman) for this, but the general process is as follows:
+1. Whitelist yourself on the RSO list
+2. Register a new account with the [`Register new user`](docs/api-docs/User-API.md#register-a-new-user) endpoint and confirm your account.
+3. Login with the new account with the [`Login user`](docs/api-docs/User-API.md#login-user)
+
+**NOTE**: Make sure you're only doing these steps on the development database and API, NOT THE PRODUCTION ONE.
+
+Now you're ready to work with all of the APIs! A few things to note:
+* If you get a 401 Unauthorized error, you'll need to renew your [access token](docs/api-docs/User-API.md#refresh-access-token) or [login again](docs/api-docs/User-API.md#login-user) to renew the refresh tokens.
+* If you're not using Postman, you'll need to add a `Authorization: Bearer <token>` header for all of the Admin API and most of the User API. If you imported the Postman collections and environments, this authorization header is automatically managed for you.
 
 # API Documentation
 

@@ -1,0 +1,720 @@
+{
+	"info": {
+		"_postman_id": "7908e44f-cfee-41d1-8269-1e3586eba9dd",
+		"name": "Monitor API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login user",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.environment.set('ACCESS_TOKEN', jsonData.access);",
+							"pm.environment.set('REFRESH_TOKEN', jsonData.refresh);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"tejashah88@gmail.com\",\n\t\"password\": \"test123!\"\n}"
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/monitor/login",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"monitor",
+						"login"
+					]
+				},
+				"description": "Logs in an existing admin user."
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh access token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.environment.set('ACCESS_TOKEN', jsonData.access);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{REFRESH_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/monitor/refresh",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"monitor",
+						"refresh"
+					]
+				},
+				"description": "Fetches a new access token given a valid refresh token."
+			},
+			"response": []
+		},
+		{
+			"name": "Revoke access token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.unset('ACCESS_TOKEN');"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/monitor/revoke-access",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"monitor",
+						"revoke-access"
+					]
+				},
+				"description": "Revokes an issued access token, preventing further use of it."
+			},
+			"response": []
+		},
+		{
+			"name": "Revoke refresh token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.unset('REFRESH_TOKEN');"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{REFRESH_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/monitor/revoke-refresh",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"monitor",
+						"revoke-refresh"
+					]
+				},
+				"description": "Revokes an issued refresh token, preventing further use of it."
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch sign up statistics",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/monitor/overview/stats/sign-up",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"monitor",
+						"overview",
+						"stats",
+						"sign-up"
+					]
+				},
+				"description": "Fetches the sign up statistics for all user account types."
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch activity statistics",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/monitor/overview/stats/activity",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"monitor",
+						"overview",
+						"stats",
+						"activity"
+					]
+				},
+				"description": "Fetches the number of active users and recent catalog searches (WIP)."
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch social media link usage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/monitor/more-stats/social-media",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"monitor",
+						"more-stats",
+						"social-media"
+					]
+				},
+				"description": "Fetches the aggregated usage of social media links across all clubs."
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch club application status usage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/monitor/more-stats/club-reqs",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"monitor",
+						"more-stats",
+						"club-reqs"
+					]
+				},
+				"description": "Fetches aggregated statistics for club application statuses."
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch logo / banner usage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/monitor/more-stats/pic-stats",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"monitor",
+						"more-stats",
+						"pic-stats"
+					]
+				},
+				"description": "Fetches the aggregated usage of logo / banner pictures for clubs."
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch list of RSO emails",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/monitor/rso/list",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"monitor",
+						"rso",
+						"list"
+					]
+				},
+				"description": "Fetches the list of RSO emails scraped from CalLink."
+			},
+			"response": []
+		},
+		{
+			"name": "Download list of RSO emails",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/monitor/rso/download",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"monitor",
+						"rso",
+						"download"
+					]
+				},
+				"description": "Downloads a CSV file of the list of RSO emails scraped from CalLink."
+			},
+			"response": []
+		},
+		{
+			"name": "Add RSO email",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"exampleadmin@berkeley.edu\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/monitor/rso",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"monitor",
+						"rso"
+					]
+				},
+				"description": "Adds a new RSO email."
+			},
+			"response": []
+		},
+		{
+			"name": "Remove RSO email",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/monitor/rso/exampleadmin@berkeley.edu",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"monitor",
+						"rso",
+						"exampleadmin@berkeley.edu"
+					]
+				},
+				"description": "Removes an existing RSO email."
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch list of clubs",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/monitor/club/list",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"monitor",
+						"club",
+						"list"
+					]
+				},
+				"description": "Fetches the list of clubs with relevent info (abridged)."
+			},
+			"response": []
+		},
+		{
+			"name": "Download list of clubs",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/monitor/club/download",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"monitor",
+						"club",
+						"download"
+					]
+				},
+				"description": "Downloads a CSV file of the list of clubs with relevent info (abridged)."
+			},
+			"response": []
+		},
+		{
+			"name": "Remove club",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/monitor/club/exampleadmin@berkeley.edu",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"monitor",
+						"club",
+						"exampleadmin@berkeley.edu"
+					]
+				},
+				"description": "Removes an existing officer user and thus, their respective club."
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch club tags with usage stats",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/monitor/tags/list",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"monitor",
+						"tags",
+						"list"
+					]
+				},
+				"description": "Fetches the list of club tags with usage statistics per tag."
+			},
+			"response": []
+		},
+		{
+			"name": "Download club tags with usage stats",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/monitor/tags/download",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"monitor",
+						"tags",
+						"download"
+					]
+				},
+				"description": "Downloads a CSV file of the list of club tags with usage statistics per tag."
+			},
+			"response": []
+		},
+		{
+			"name": "Add club tag",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Education\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/monitor/tags",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"monitor",
+						"tags"
+					]
+				},
+				"description": "Adds a new club tag."
+			},
+			"response": []
+		},
+		{
+			"name": "Edit club tag",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Community Service\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/monitor/tags/<insert-tag-id-here>",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"monitor",
+						"tags",
+						"<insert-tag-id-here>"
+					]
+				},
+				"description": "Adds a new club tag."
+			},
+			"response": []
+		},
+		{
+			"name": "Remove club tag",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/monitor/tags/<insert-tag-id-here>",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"monitor",
+						"tags",
+						"<insert-tag-id-here>"
+					]
+				},
+				"description": "Removes an existing club tag, if there are no clubs using said tag."
+			},
+			"response": []
+		}
+	]
+}
