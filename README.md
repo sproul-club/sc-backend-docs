@@ -24,7 +24,9 @@ Table of Contents:
             * [How to design a recommendation system?](#how-to-design-a-recommendation-system)
             * [How to deploy said recommendation system to the backend?](#how-to-deploy-said-recommendation-system-to-the-backend)
             * [How does backend interact with the recommendation system?](#how-does-backend-interact-with-the-recommendation-system)
-        * [Monitor Dashboard](#monitor-dashboard)
+        * [Admin Dashboard](#admin-dashboard)
+            * [Access instructions](#access-instructions)
+            * [Development for Admin Dashboard](#development-for-admin-dashboard)
     * [Reusable logic with decorators](#reusable-logic-with-decorators)
         * [How do decorators work?](#how-do-decorators-work)
         * [What are some real-world applications of decorators?](#what-are-some-real-world-applications-of-decorators)
@@ -390,21 +392,29 @@ From a backend perspective, you won't have API calls to directly fetch the outpu
 
 Feel free to refer to the [Catalog API Blueprint](https://github.com/sproul-club/sc-backend/blob/master/blueprints/catalog_blueprint.py) and check out the `get_org_by_id` function for an idea of how that interaction works.
 
-### Monitor Dashboard
+### Admin Dashboard
 
-**NOTE: As of now, there's no feasible way to add new users to be able to log into the system. We're working on fixing this so stay tuned!**
+Link: https://sproul-club.github.io/sc-admin
 
-If you've been peering through the codebase and the documentation, you've probably noticed that there's this "Monitor API" that doesn't seem to be used in the frontend application. That's because that API powers our [secret custom-built admin dashboard](https://github.com/sproul-club/sc-admin)! This dashboard provides us with metrics such as the number of clubs with confirmed email accounts vs all registered clubs, the number of club admins currently logged in, the social media link usage, and more, as well as admin functionality for adding new club emails to the RSO list, downloading all the club details to a CSV, and more.
+If you've been peering through the codebase and the documentation, you've probably noticed that there's this "Monitor API" that doesn't seem to be used in the frontend application. That's because that API powers our [secret custom-built admin dashboard](https://github.com/sproul-club/sc-admin)!
+
+This dashboard provides us with metrics such as the number of clubs with confirmed email accounts vs all registered clubs, the number of club admins currently logged in, the social media link usage, and more, as well as admin functionality for adding new club emails to the RSO list, downloading all the club details to a CSV, and more!
 
 ![sproul.club secret dashboard - main page](images/admin-dashboard-main-page.png "sproul.club secret dashboard - main page")
 
 ![sproul.club secret dashboard - more stats](images/admin-dashboard-more-stats.png "sproul.club secret dashboard - more stats")
 
+#### Access instructions
+
+1. Go to [this link](https://sproul-club.github.io/sc-admin) to access the admin dashboard
+2. Log in via the credentials in the secret location ;)
+
+#### Development for Admin Dashboard
+
 If you love working with data and if you love working with data visualizations, then working on this dashboard will be perfect for you! There are a few things to keep in mind if you plan to work with it:
 
 1. You'll need sufficient knowledge working with MongoDB, especially with [MongoDB aggregations](https://docs.mongodb.com/manual/aggregation). If you don't know what they are, they essentially allow computations of existing data on the database, as opposed to doing said computations on the backend itself. I won't cover how aggregations work here, since it's not required to know about them for the majority of backend development. With that said, here's a quick guide on [how to work with aggregations](https://appdividend.com/2018/10/25/mongodb-aggregate-example-tutorial) and [another guide using MongoDB Compass](https://www.analyticsvidhya.com/blog/2021/06/how-to-aggregate-pipeline-with-mongodb). I'd highly recommend downloading and using [MongoDB Compass](https://www.mongodb.com/products/compass) to play with aggregations, as it gives you a nice visualizer for how your data is computed and processed within the aggregation pipeline.
 2. While it's not strictly required, if you want to add your data visualizations or add new features to the dashboard, you'll need to know some frontend programming, specifically with React. The frontend codebase should be relatively simpler than what you'll find on the main frontend codebase, but due to the nature of React's coding style, it's probably better if you talk to a frontend engineer to help with this. To start, feel free to check out the [Chakra UI library](https://chakra-ui.com) that's used to style the web application, the [Apache eCharts library](https://echarts.apache.org/en/index.html) which houses [a huge collection of various charts](https://echarts.apache.org/examples/en/index.html) and the corresponding [eCharts React library](https://github.com/hustcc/echarts-for-react).
-3. (**WIP**): Since there's no process to sign up new users, you'll need to insert a new user into the database. Right now, we're working on a script to insert new users given a username and password combo so stay tuned for that.
 
 ## Reusable logic with decorators
 
